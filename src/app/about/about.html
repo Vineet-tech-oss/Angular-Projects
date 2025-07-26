@@ -1,0 +1,53 @@
+<div class="about-container">
+  <div class="about-header">
+    <h2>About Our E-Commerce Showcase</h2>
+    <p>Learn more about our application and development team</p>
+  </div>
+
+  <div class="about-content">
+    <div class="app-info">
+      <h3>About the Application</h3>
+      <p>
+        This is a modern e-commerce showcase application built with Angular 20. 
+        It demonstrates various Angular concepts including components, services, 
+        routing, pipes, and directives.
+      </p>
+      
+      <div class="features">
+        <h4>Key Features:</h4>
+        <ul>
+          <li>Browse product catalog with category filters</li>
+          <li>View featured and discounted products</li>
+          <li>Add items to wishlist for later purchase</li>
+          <li>Compare multiple products side by side</li>
+          <li>Responsive design for all devices</li>
+          <li>Clean and intuitive user interface</li>
+        </ul>
+      </div>
+
+      <div class="technologies">
+        <h4>Technologies Used:</h4>
+        <ul>
+          <li>Angular 20 (Standalone Components)</li>
+          <li>TypeScript for type safety</li>
+          <li>CSS3 with modern gradients</li>
+          <li>Responsive Grid Layout</li>
+          <li>Component-based architecture</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="team-info">
+      <h3>Development Team</h3>
+      <p>Meet the talented developers who created this application:</p>
+      
+      <div class="team-grid">
+        <div class="team-member" *ngFor="let developer of developers">
+          <h4>{{ developer.name }}</h4>
+          <p class="role">{{ developer.role }}</p>
+          <p class="expertise">{{ developer.expertise }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

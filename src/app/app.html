@@ -1,0 +1,34 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/home">🛒 E-Commerce Showcase</a>
+    </div>
+    
+    <ul class="nav-menu">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
+      <li><a routerLink="/deals" routerLinkActive="active">Deals</a></li>
+      <li>
+        <a routerLink="/wishlist" routerLinkActive="active">
+          Wishlist
+          <span class="count-badge" *ngIf="wishlistCount > 0">{{ wishlistCount }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/compare" routerLinkActive="active">
+          Compare
+          <span class="count-badge" *ngIf="compareCount > 0">{{ compareCount }}</span>
+        </a>
+      </li>
+      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2024 E-Commerce Showcase. Built with Angular 20.</p>
+  </footer>
+</div>

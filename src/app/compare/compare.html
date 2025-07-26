@@ -1,0 +1,90 @@
+<div class="compare-container">
+  <div class="compare-header">
+    <h2>Product Comparison</h2>
+    <button 
+      *ngIf="compareProducts.length > 0"
+      class="clear-btn"
+      (click)="clearCompareList()">
+      Clear All
+    </button>
+  </div>
+
+  <div class="compare-table-container" *ngIf="compareProducts.length > 0; else emptyCompare">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th *ngFor="let product of compareProducts" class="product-header">
+            <div class="product-info">
+              <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+              <h4>{{ product.name }}</h4>
+              <button class="remove-btn" (click)="onRemoveFromCompare(product.id)">Remove</button>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature-label">Price</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            {{ product.price | currency:'INR':'symbol':'1.0-0' }}
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Brand</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            {{ product.specifications.brand }}
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Model</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            {{ product.specifications.model }}
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Category</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            {{ product.category }}
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Rating</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            ⭐ {{ product.rating.stars }} ({{ product.rating.reviews }} reviews)
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Stock</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            <span [ngClass]="{'in-stock': product.stockDetails.inStock, 'out-of-stock': !product.stockDetails.inStock}">
+              {{ product.stockDetails.inStock ? 'In Stock (' + product.stockDetails.quantity + ')' : 'Out of Stock' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Warranty</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            {{ product.specifications.warranty }}
+          </td>
+        </tr>
+        <tr>
+          <td class="feature-label">Sale Status</td>
+          <td *ngFor="let product of compareProducts" class="feature-value">
+            <span [ngClass]="{'on-sale': product.onSale, 'regular': !product.onSale}">
+              {{ product.onSale ? 'On Sale' : 'Regular Price' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyCompare>
+    <div class="empty-compare">
+      <h3>No products to compare</h3>
+      <p>Add products to compare their features side by side</p>
+      <a routerLink="/products" class="shop-now-btn">Browse Products</a>
+    </div>
+  </ng-template>
+</div>

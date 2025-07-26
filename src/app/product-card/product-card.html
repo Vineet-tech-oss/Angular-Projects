@@ -1,0 +1,44 @@
+<div class="product-card" appHighlight>
+  <div class="product-image">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+    <div class="sale-badge" *ngIf="product.onSale">SALE</div>
+    <div class="stock-status" [ngClass]="{'out-of-stock': !product.stockDetails.inStock}">
+      {{ product.stockDetails.inStock ? 'In Stock' : 'Out of Stock' }}
+    </div>
+  </div>
+
+  <div class="product-info">
+    <h3>{{ product.name }}</h3>
+    <p class="brand">{{ product.specifications.brand }}</p>
+    <p class="price">{{ product.price | currency:'INR':'symbol':'1.0-0' }}</p>
+    
+    <div class="rating">
+      <span *ngFor="let star of getStarArray()" class="star">⭐</span>
+      <span class="rating-text">({{ product.rating.reviews }} reviews)</span>
+    </div>
+
+    <div class="product-actions">
+      <button 
+        *ngIf="showWishlistButton"
+        class="btn wishlist-btn"
+        [ngClass]="{'active': isInWishlist}"
+        (click)="onWishlistToggle()">
+        {{ isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist' }}
+      </button>
+
+      <button 
+        *ngIf="showCompareButton && !isInCompare"
+        class="btn compare-btn"
+        (click)="onCompareAdd()">
+        Add to Compare
+      </button>
+
+      <button 
+        *ngIf="isInCompare"
+        class="btn remove-compare-btn"
+        (click)="onRemoveFromCompare()">
+        Remove from Compare
+      </button>
+    </div>
+  </div>
+</div>

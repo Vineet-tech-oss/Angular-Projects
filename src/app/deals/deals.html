@@ -1,0 +1,25 @@
+<div class="deals-container">
+  <div class="deals-header">
+    <h2>🔥 Special Deals & Offers</h2>
+    <p>Don't miss out on these amazing discounts!</p>
+  </div>
+
+  <div class="products-grid" *ngIf="saleProducts.length > 0; else noDeals">
+    <app-product-card 
+      *ngFor="let product of saleProducts"
+      [product]="product"
+      [isInWishlist]="isInWishlist(product.id)"
+      [isInCompare]="isInCompare(product.id)"
+      (wishlistToggle)="onWishlistToggle($event)"
+      (compareAdd)="onCompareAdd($event)">
+    </app-product-card>
+  </div>
+
+  <ng-template #noDeals>
+    <div class="no-deals">
+      <h3>No deals available right now</h3>
+      <p>Check back later for exciting offers</p>
+      <a routerLink="/products" class="browse-btn">Browse All Products</a>
+    </div>
+  </ng-template>
+</div>

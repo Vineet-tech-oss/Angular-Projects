@@ -1,0 +1,30 @@
+<div class="wishlist-container">
+  <div class="wishlist-header">
+    <h2>My Wishlist</h2>
+    <button 
+      *ngIf="wishlistProducts.length > 0"
+      class="clear-btn"
+      (click)="clearWishlist()">
+      Clear All
+    </button>
+  </div>
+
+  <div class="products-grid" *ngIf="wishlistProducts.length > 0; else emptyWishlist">
+    <app-product-card 
+      *ngFor="let product of wishlistProducts"
+      [product]="product"
+      [showWishlistButton]="false"
+      [isInCompare]="isInCompare(product.id)"
+      (removeFromWishlist)="onRemoveFromWishlist($event)"
+      (compareAdd)="onCompareAdd($event)">
+    </app-product-card>
+  </div>
+
+  <ng-template #emptyWishlist>
+    <div class="empty-wishlist">
+      <h3>Your wishlist is empty</h3>
+      <p>Add some products to your wishlist to see them here</p>
+      <a routerLink="/products" class="shop-now-btn">Shop Now</a>
+    </div>
+  </ng-template>
+</div>

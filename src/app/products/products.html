@@ -1,0 +1,31 @@
+<div class="products-container">
+  <h2>All Products</h2>
+  
+  <div class="filter-section">
+    <h3>Filter by Category:</h3>
+    <div class="category-buttons">
+      <button 
+        *ngFor="let category of categories"
+        [ngClass]="{'active': selectedCategory === category}"
+        class="category-btn"
+        (click)="filterByCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+  </div>
+
+  <div class="products-grid" *ngIf="filteredProducts.length > 0; else noProducts">
+    <app-product-card 
+      *ngFor="let product of filteredProducts"
+      [product]="product"
+      [isInWishlist]="isInWishlist(product.id)"
+      [isInCompare]="isInCompare(product.id)"
+      (wishlistToggle)="onWishlistToggle($event)"
+      (compareAdd)="onCompareAdd($event)">
+    </app-product-card>
+  </div>
+
+  <ng-template #noProducts>
+    <p class="no-products">No products found in this category</p>
+  </ng-template>
+</div>
