@@ -32,7 +32,7 @@ import { ProductCardComponent } from '../product-card/product-card';
           [product]="product"
           [showWishlistButton]="false"
           [isInCompare]="isInCompare(product.id)"
-          (removeFromWishlist)="onRemoveFromWishlist($event)"
+          (removeFromWishlist)="onRemoveFromWishlist(product.id)"
           (compareAdd)="onCompareAdd($event)">
         </app-product-card>
       </div>
@@ -167,4 +167,5 @@ export class WishlistComponent implements OnInit {
     this.wishlistService.clearWishlist();
     this.wishlistProducts = [];
   }
+  
 }

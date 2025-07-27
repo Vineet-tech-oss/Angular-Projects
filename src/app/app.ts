@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,13 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
         </div>
         
         <ul class="nav-menu">
+          <li><a routerLink="/auth" routerLinkActive="active">Login/Signup</a></li>
           <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
           <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
           <li><a routerLink="/deals" routerLinkActive="active">Deals</a></li>
           <li><a routerLink="/wishlist" routerLinkActive="active">Wishlist</a></li>
           <li><a routerLink="/compare" routerLinkActive="active">Compare</a></li>
+          <li><a routerLink="/cart" routerLinkActive="active">🛒 Cart ({{ cartService.getCart().length }}) </a></li>
           <li><a routerLink="/about" routerLinkActive="active">About</a></li>
         </ul>
       </nav>
@@ -128,6 +131,10 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     }
   `]
 })
+
+
 export class AppComponent {
   title = 'ecommerce-showcase';
+
+  constructor(public cartService: CartService) {}
 }
