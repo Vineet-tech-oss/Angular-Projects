@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class Auth {
+export class AuthService {
+  
+  constructor(private router: Router) {}
+
   // User login: token set karo
   login(token: string) {
     localStorage.setItem('userToken', token);
@@ -26,6 +29,4 @@ export class Auth {
   getToken(): string | null {
     return localStorage.getItem('userToken');
   }
-
-  constructor(private router: Router) {}
 }

@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Product } from '../data/data';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
-    <div class="product-card">
+    <div class="product-card" [routerLink]="['/products', product.id]" style="cursor: pointer;">
       <div class="product-image">
         <img [src]="product.imageUrl" [alt]="product.name" />
         <div class="sale-badge" *ngIf="product.onSale">SALE</div>
@@ -23,7 +24,7 @@ import { Product } from '../data/data';
           <span *ngFor="let star of getStarArray()">⭐</span>
           <span class="rating-text">({{ product.rating.reviews }} reviews)</span>
         </div>
-        <div class="product-actions">
+        <div class="product-actions" (click)="$event.stopPropagation()">
           <button *ngIf="showWishlistButton" class="btn wish-btn" [class.active]="isInWishlist" (click)="onWishlist()">
             <span *ngIf="isInWishlist">❤️</span>
             <span *ngIf="!isInWishlist">🤍</span>
@@ -91,22 +92,18 @@ import { Product } from '../data/data';
     .wish-btn { background: #fff0f4; color: #d6336c; }
     .wish-btn.active, .wish-btn:hover { background: #d6336c; color: #fff; }
     .compare-btn {
-  background: #edf5ff;
-  color: #1971c2;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Jab sirf hover ho aur active na ho */
-.compare-btn:hover {
-  background: #1971c2;
-  color: #fff;
-}
-
-/* Jab sirf active ho chahe hover ho ya na ho */
-.compare-btn.active {
-  background: #38b000 !important; /* your desired green or any color */
-  color: #fff !important;
-}
+      background: #edf5ff;
+      color: #1971c2;
+      transition: background 0.3s, color 0.3s;
+    }
+    .compare-btn:hover {
+      background: #1971c2;
+      color: #fff;
+    }
+    .compare-btn.active {
+      background: #38b000 !important;
+      color: #fff !important;
+    }
     .cart-btn {
       background: linear-gradient(135deg, #0d6efd 0%, #0e78f9 100%);
       color: white; margin-top: 3px;
@@ -118,7 +115,7 @@ export class ProductCardComponent {
   @Input() product!: Product;
   @Input() isInWishlist: boolean = false;
   @Input() isInCompare: boolean = false;
- @Input() showWishlistButton: boolean = true; 
+  @Input() showWishlistButton: boolean = true; 
   @Output() wishlistToggle = new EventEmitter<Product>();
   @Output() compareAdd = new EventEmitter<Product>();
   @Output() addToCart = new EventEmitter<Product>();

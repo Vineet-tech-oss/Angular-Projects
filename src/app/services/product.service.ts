@@ -31,7 +31,9 @@ export class ProductService {
     return categories;
   }
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find(product => product.id === id);
-  }
+  getProductById(id: string): Product | undefined {
+  const numericId = +id; // ya Number(id)
+  return this.products.find(product => product.id === numericId);
+}
+
 }

@@ -18,22 +18,23 @@ export class WishlistService {
   }
 
   removeFromWishlist(productId: number): void {
-    this.wishlist = this.wishlist.filter(product => product.id !== productId);
+    this.wishlist = this.wishlist.filter(p => p.id !== productId);
   }
 
+  isInWishlist(productId: number): boolean {
+    return this.wishlist.some(p => p.id === productId);
+  }
+
+  clearWishlist(): void {
+    this.wishlist = [];
+  }
+
+  // Naya toggle method
   toggleWishlist(product: Product): void {
     if (this.isInWishlist(product.id)) {
       this.removeFromWishlist(product.id);
     } else {
       this.addToWishlist(product);
     }
-  }
-
-  isInWishlist(productId: number): boolean {
-    return this.wishlist.some(product => product.id === productId);
-  }
-
-  clearWishlist(): void {
-    this.wishlist = [];
   }
 }

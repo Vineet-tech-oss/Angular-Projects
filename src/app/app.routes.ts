@@ -27,6 +27,11 @@ export const routes: Routes = [
     loadComponent: () => import('./deals/deals').then(m => m.DealsComponent),
     canActivate: [AuthGuard]
   },
+  {
+  path: 'products/:id',
+  loadComponent: () => import('./product-details/product-details').then(m => m.ProductDetailsComponent),
+  canActivate: [AuthGuard] // agar protected rakhna hai
+},
   { 
     path: 'about', 
     loadComponent: () => import('./about/about').then(m => m.AboutComponent),
